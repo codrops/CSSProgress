@@ -1,0 +1,215 @@
+/* Component styles */
+@import 'settings';
+@import 'compass/css3';
+
+h1 span.heading-3d
+{
+    font-size: 1em; 
+    font-weight: bold;
+    display: inline-block;
+    color: #eaeaea;
+    transform: scale(1.4) translateY(-.25em) rotateZ(8deg);
+    text-shadow:   0.01em 0.02em 0.01em rgba(150, 150, 150, 0.5), -0.01em -0.01em 0.01em white, 0 0 1em rgba(0, 0, 0, 0.15), .05em 0.2em 0.08em rgba(0, 0, 0, 0.3), 0 0.15em 0.35em rgba(0, 0, 0, 0.3), 0 0.6em 1.6em rgba(0, 0, 0, 0.3), 0 0.2em 2.04em white;
+    padding: 0;
+}
+
+.content
+{
+    padding-top: 0;
+}
+
+@mixin build-skin($color, $name) {
+    &.#{$name}
+    {
+        .bar-face,
+        &[aria-valuenow='0'] .face-position.right
+        {
+            background-color: $faces-color;
+        }
+        .face-position.left,
+        &[aria-valuenow='100'] .face-position.right
+        {
+            background-color: rgba($color, .2);
+        }
+        &[aria-valuenow='100'] .face-position.right
+        {
+            transition-delay: $sides-transition-duration;
+        }
+        .face-position.floor.volume-lights
+        {
+            box-shadow:
+                0 -0.2em 1em rgba(0,0,0,.15),
+                0 0.2em 0.1em -5px rgba(0,0,0,.3),
+                0 -0.75em 1.75em rgba($white,.6);
+        }
+        .percentage:before 
+        {
+            background-color: rgba($color, .5);
+        }
+        .volume-lights.shine:before 
+        {
+            box-shadow: 0 1.6em 3em rgba($color,.25);
+        }
+
+        &:not(.has-colors)
+        {
+            &[aria-valuenow] .face-position
+            {
+                background-color: rgba($dark, .6);
+            }
+            .percentage:before 
+            {
+                background-color: transparent;
+            }
+            .volume-lights.shine:before 
+            {
+                box-shadow: 0 1.6em 3em rgba($color,0);
+            }
+        }
+    }
+}
+
+.progress-factor
+{
+    font-size: $factor-size + em;
+    padding: 1em .2em 0;
+    flex: 0 1 100%;
+}
+
+.progress-bar
+{
+    font-size: 1em;
+    text-align: center;
+
+    width: 100%;
+    height: 1em;
+
+    perspective: 12em;
+    perspective-origin: 50% 50%;
+}
+
+.bar
+{
+
+    font-size: 1em;
+
+    position: relative;
+
+    display: inline-block;
+
+    width: 4em;
+    height: 1em;
+
+    transition: all $sides-transition-duration ease-in-out;
+
+    &.regular-width
+    {
+        width: 1em;
+        &[aria-valuenow] .percentage:before
+        {
+            width: 100%;
+        }
+    }
+
+    transform-style: preserve-3d;
+
+    &.has-rotation
+    {
+        transform: rotateX(60deg);
+    }
+
+    .bar-face
+    {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        display: inline-block;
+
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba($navy, .3);
+        backface-visibility: visible;
+
+        transition: transform $sides-transition-duration ease-out;
+
+        &.face-position
+        {
+            transform-origin: 50% 100%;
+
+            &.roof
+            {
+                transform: translateZ(1em);
+                transition-delay: $sides-transition-duration * 4;
+            }
+            &.front
+            {
+                transform: rotateX(-90deg);
+                transition-delay: 0s;
+            }
+            &.right
+            {
+                left: auto;
+                right: -.5em;
+                width: 1em;
+                transform: rotateX(-90deg) rotateY(90deg) translateX(.5em);
+                transition-delay: $sides-transition-duration;
+            }
+            &.back
+            {
+                transform: rotateX(-90deg) rotateY(0deg) translateZ(-1em);
+                transition-delay: $sides-transition-duration * 2;
+            }
+            &.left
+            {
+                width: 1em;
+                transform: rotateX(-90deg)rotateY(-90deg) translateX(-.5em) translateZ(.5em);
+                transition-delay: $sides-transition-duration * 3;
+            }
+        }
+
+        &.percentage:before
+        {
+            content: '';
+
+            font-size: .25em;
+            line-height: 4em;
+
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 100%;
+
+            margin: 0;
+
+            display: block;
+
+            box-sizing: border-box;
+
+            color: rgba($dark, .8);
+
+            transition: all $sides-transition-duration ease-out;
+        }
+    }
+
+    @include build-skin($red, 'red');
+    @include build-skin($yellow, 'yellow');
+    @include build-skin($lime, 'lime');
+    @include build-skin($navy, 'navy');
+    @include build-skin($cyan, 'cyan');
+    @include build-skin($dark, 'dark');
+    @include build-skin($orange, 'orange');
+
+    @for $i from 1 to 101
+    {
+        &[aria-valuenow='#{$i}']
+        {
+            .percentage:before
+            {
+                width: $i * 1%;
+            }
+        }
+    }
+}

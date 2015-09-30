@@ -1,0 +1,299 @@
+@import 'settings';
+@import 'compass/css3';
+
+@function set-positive($number)
+{
+	$result: $number * $number;
+	@return sqrt($result) 
+}
+
+@mixin set-gradient-step($value1, $value2, $percent)
+{
+	$color-result: mix($value2, $value1, $percent);
+
+	background-color: $color-result;
+	border-bottom: 1px solid darken($color-result, 05); 
+	&:after
+	{
+		border-bottom-color: $color-result;
+	}
+}
+
+.flexy-grid
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 4em 0;
+	.flexy-column
+	{
+		display: flex;
+		flex: 1;		
+		justify-content: center;
+		margin-bottom: 3em;
+		.flexy-item
+		{
+					flex: 1;
+		}
+	}
+	&:nth-of-type(odd) {
+		background-color: #D8DBE4; 
+	}
+	input[type='checkbox']{
+		display: none;  
+	}
+}
+
+.value-label {
+	position: relative;
+	display: inline-block;
+	margin: 4em 0 2.5em 0;
+	font-size: 1em;
+	font-weight: bold;
+	line-height: 1em;
+	padding: 1em;
+	color: $white;
+	background-color: rgba($orange, .6);
+	border: 1px solid rgba($gray, .2);
+	border-radius: 0.25em;
+	box-shadow: 0 0.1em 0.25em rgba($gray, 0.6), inset 0 0.15em 0.05em rgba($white, 0.2);
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.fa,
+.fa:before {
+	width: 1em;
+	height: 1em;
+	line-height: 1em;
+	text-align: center;
+}
+
+.fa {
+	margin: 0 .1em;
+	transition: transform 0.25s ease-in-out;
+	transform-origin: 50% 55%;
+}
+
+input[type='checkbox']:checked  ~ .value-label
+{
+	background: $dark;
+	box-shadow: none;
+}
+
+input[type='checkbox']:checked  ~ .flexy-column .bar[aria-valuenow] .percentage:before {
+	width: 90%;
+}
+input[type='checkbox']:checked  ~ .flexy-column .bar[aria-valuenow]
+{
+	&.heat-gradient
+	{
+		.tooltip
+		{
+			background-color: $red;
+			border-bottom: 1px solid darken($red, 05); 
+			&:after {
+				border-bottom-color: $red;
+			}
+		}
+	}
+	.tooltip {
+		left: 90%;
+		&:before {
+			content: '90%';
+		}
+	}
+}
+
+.dots-pattern .percentage:before {
+  background: radial-gradient(rgba($white, .5) 10%, transparent 5%) 0 0, radial-gradient(rgba($white, .5) 10%, transparent 5%) .5em .5em;
+  background-size: 1em 1em;
+}
+
+.bar.heat-gradient
+{
+	// .3
+	$color1: rgba($yellow, .8);
+	$color2: rgba($red, .6);
+	.face-position.left
+	{
+		background-color: $color1;
+	}
+	.percentage:before {
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ec545b+0,ec5799+100 */
+		background-color: $color1; /* Old browsers */
+		background: -moz-linear-gradient(left,  $color1 0%, $color2 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%,$color1), color-stop(100%,$color2)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left,  $color1 0%,$color2 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left,  $color1 0%,$color2 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left,  $color1 0%,$color2 100%); /* IE10+ */
+		background: linear-gradient(to right,  $color1 0%,$color2 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=1 ); /* IE6-9 */
+		background-size: 16em;
+	}
+	.volume-lights.shine:before
+	{
+		box-shadow: -2em 1.6em 3em -1em rgba($color1, 0.3), 2em 1.6em 3em -1em rgba($color2, 0.3);
+	}
+	&[valuenow="100"] .face-position.right
+	{
+		background-color: $color2;
+	}
+}
+
+.bar.ruler .percentage:before {
+	background-image: 	linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+	background-size: 1em 1em, 1.6em 2em, .8em 2em;
+}
+
+.bar.ruler-2 .percentage:before {
+	background-image: 	linear-gradient(90deg, rgba(255,255,255,.1) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.14) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.18) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.22) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.26) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.30) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.34) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.38) .8em, transparent 1px),
+						linear-gradient(90deg, rgba(255,255,255,.42) .8em, transparent 1px);
+	background-size: 16em 1em;
+	background-position: 1.6em 0, 3.2em 0, 4.8em 0, 6.4em 0, 8em 0, 9.6em 0, 11.2em 0, 12.8em 0, 14.4em 0;
+}
+
+.bar.ruler-3 .percentage:before {
+	background-image: linear-gradient(90deg, rgba(255,255,255,.1) .8em, transparent 1px);
+	background-size: 1.6em 2em;
+}
+
+.bar.move .bar-face.face-position.floor,
+.bar.rotate .bar-face.face-position.floor {
+	transition: all 0.5s ease-in-out;
+}
+.bar.move:hover {
+	transform: rotateX(60deg) translateZ(.1em);
+	.bar-face.face-position.floor.volume-lights {
+		box-shadow: 0 -0.1em 1em rgba(0, 0, 0, 0.15),
+					0 0.35em 0.2em -8px rgba(0, 0, 0, 0.15),
+					0 -0.75em 1.75em rgba(254, 254, 254, 0.6);
+	}
+}
+
+.bar.rotate.hover,
+.bar.rotate:hover {
+	transform: rotateX(60deg) rotate(90deg);
+	.bar-face.face-position.floor.volume-lights {
+		box-shadow: 0 0 1em rgba(0, 0, 0, 0.3),
+					.2em 0 .1em -5px rgba(0, 0, 0, 0.3),
+					-.5em 0 1.75em rgba(254, 254, 254, 0.6);
+	}
+	.bar-face.face-position.shine:before
+	{
+		box-shadow: none;
+	}
+}
+
+.tooltip
+{
+	$color: lighten($red, 25);
+	font-size: .65em;
+	font-weight: bold;
+	margin: 1.85em 0 0 -.5em;
+	display: inline-block;
+	position: absolute;
+	line-height: 1em;
+	height: 1em;
+	width: 1em;
+	left: 0;
+	background-color: $color;
+	color: $white;
+	border-bottom: 1px solid darken($color, 05); 
+	box-shadow: 0 .05em .1em -.02em rgba(0, 0, 0, 0.4),
+				0 .1em .6em rgba(0, 0, 0, 0.3);
+	transition: all $sides-transition-duration ease-out;
+	&:after, 
+	&:before 
+	{
+		// transition: all $sides-transition-duration ease-out;
+		display: inline-block;
+		font-size: .25em;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+	}
+	&:after 
+	{
+		content: '';
+		height: 0;
+		width: 0;
+		margin: -.75em 0 0 1em;
+		border: 1em solid transparent;
+		border-bottom-color: $color;
+		border-top-width: 0;
+		transition: all $sides-transition-duration ease-out;
+	}
+	&:before
+	{
+		height: 100%;
+		text-align: center;
+	}
+	&.pos-2
+	{
+		box-shadow: none;
+		margin-top: -.6em;
+		transform: rotateX(-90deg) translateY(-0.5em);
+		transform-origin: 50% 100%;
+		&:after
+		{
+			margin: 3.75em 0 0 1em;
+			border-bottom-color: inherit;
+			border-bottom-width: 0;
+			border-top-width: 1em;
+			border-top-color: $color;
+		}
+		.shadow
+		{
+			display: inline-block;
+			width: 20%;
+			height: .02em;
+			background-color: transparent;
+			position: absolute;
+			left: 40%;
+			bottom: 0;
+			box-shadow: 0 0.7em 0.05em black,
+				0 0.7em 0.3em black;
+		}
+	}
+	&.white {
+		background-color: $white;
+		border-bottom: 1px solid darken($white, 10);
+		color: $dark;
+		box-shadow: 0 .08em .1em .0em rgba(0, 0, 0, .2), 0 .1em 1.6em rgba(0, 0, 0, .2);
+		&:after {
+			border-bottom-color: $white;
+		}
+	}
+}
+
+@for $i from 1 to 101
+{
+	.bar[aria-valuenow='#{$i}']
+	{
+		.tooltip
+		{
+			left: $i * 1%;
+			&:before
+			{
+				content: '#{$i}%';
+			}
+		}
+		&.heat-gradient .heat-gradient-tooltip
+		{
+			@include set-gradient-step($yellow, $red, $i);
+		}
+	}
+}
