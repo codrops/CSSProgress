@@ -4,7 +4,7 @@ A tutorial on how to create shaded CSS-only progress bars with Sass. By Rafael G
 
 [Article on Codrops](http://tympanus.net/codrops/?p=25049)
 
-[Demo](http://tympanus.net/Development/CSSProgress/)
+[Demo](http://tympanus.net/Tutorials/CSSProgress/)
 
 ## License
 
