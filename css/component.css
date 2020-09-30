@@ -5,7 +5,7 @@ h1 span.heading-3d {
   font-weight: bold;
   display: inline-block;
   color: #eaeaea;
-  transform: scale(1.4) translateY(-0.25em) rotateZ(8deg);
+  transform: scale(1.4) translateY(-0.50em) rotateZ(8deg);
   text-shadow: 0.01em 0.02em 0.01em rgba(150, 150, 150, 0.5), -0.01em -0.01em 0.01em white, 0 0 1em rgba(0, 0, 0, 0.15), 0.05em 0.2em 0.08em rgba(0, 0, 0, 0.3), 0 0.15em 0.35em rgba(0, 0, 0, 0.3), 0 0.6em 1.6em rgba(0, 0, 0, 0.3), 0 0.2em 2.04em white;
   padding: 0;
 }
@@ -17,8 +17,8 @@ h1 span.heading-3d {
 
 /* line 72, ../scss/component.scss */
 .progress-factor {
-  font-size: 5em;
-  padding: 1em .2em 0;
+  font-size: 3em;
+  padding: 1em .3em 0;
   flex: 0 1 100%;
 }
 
@@ -121,7 +121,7 @@ h1 span.heading-3d {
 }
 /* line 29, ../scss/component.scss */
 .bar.red .face-position.left, .bar.red[aria-valuenow='100'] .face-position.right {
-  background-color: rgba(236, 0, 113, 0.2);
+  background-color: rgba(236, 0, 113, 0.3);
 }
 /* line 34, ../scss/component.scss */
 .bar.red[aria-valuenow='100'] .face-position.right {
