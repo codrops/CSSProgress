@@ -1,4 +1,4 @@
-@font-face {
+@font-face{
 	font-weight: normal;
 	font-style: normal;
 	font-family: 'codropsicons';
@@ -13,7 +13,7 @@
 .clearfix:before, .clearfix:after {display: table;  content: ''; }
 .clearfix:after { clear: both; }
 
-body {
+body{
 	font-family: Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
 	color: #444;
 	background: #E5E8EF;
